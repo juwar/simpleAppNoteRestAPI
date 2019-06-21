@@ -11,7 +11,7 @@ exports.getNotes = function (req, res, next){
     let search = req.query.search || '';
     let sort = req.query.sort || 'DESC';
     let limit = req.query.limit || 10
-    let page = req.query.page || 1
+    let page = parseInt(req.query.page) || 1
     let offset = ((page -1)*limit)
     search = '%'+search+'%'
 
