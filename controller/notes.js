@@ -1,8 +1,7 @@
 'use strict'
 
-const response = require('./response');
-const connection = require('./connect');
-const getTime = require('./getTime')
+const response = require('../response');
+const connection = require('../connect');
 
 exports.ok = function (req, res){
     response.ok('OK', res);
@@ -34,7 +33,7 @@ exports.getNotes = function (req, res, next){
                             throw error
                         } else {
                             if (rows != ''){
-                                console.log('Total ',total,'\nPage ',page,'\nTotal Page',totalPage,'\nRow on Page',limit)
+                                console.log('Total ',total,'\nPage ',page,'\nTotal Page',totalPage,'Row on Page',limit)
                                 return res.send({
                                     data : rows,
                                     total : total,
@@ -126,24 +125,5 @@ exports.deleteNote = function (req, res){
         return res.send ({
             message: 'Variable id not be null'
         })
-    }
-}
-
-exports.createCategory = function (req, res){
-    let category = req.body.category
-    if (category !=''){
-        connection.query(
-            `INSERT into category SET category=?`,
-            [category],
-            function(error){
-                if (error){
-                    throw error
-                } else {
-                    return res.send({
-                        message: 'Category has ben insert'
-                    })
-                }
-            }
-        )
     }
 }
